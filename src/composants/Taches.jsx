@@ -36,6 +36,30 @@ export default function Taches({etatTaches, utilisateur}) {
     }
   }
 
+  function gererBasculerTache(tid, etatActuel) {
+    console.log('Util : ', uid);
+    console.log('Tâche : ', tid);
+    console.log('Etat actuel : ', etatActuel);
+    crudTaches.modifier(uid,tid,etatActuel).then(
+      () => setTaches(taches.map(
+        tache => {
+          if(tache.id===tid) {
+            tache.completee = !etatActuel;
+          }
+          return tache;
+        }
+      ))
+    )
+  }
+
+  function gererSupprimerTache(tid) {
+    crudTaches.supprimer(uid,tid).then(
+      () => setTaches(taches.filter(
+        tache => tache.id!==tid
+      ))
+    )
+  }
+
   return (
     <section className="Taches">
       <form onSubmit={e => gererAjoutTache(uid, e)}>
@@ -49,7 +73,14 @@ export default function Taches({etatTaches, utilisateur}) {
       </form>
       <div className="listeTaches">
         {
-          taches.map(tache => <Tache key={tache.id} {... tache} />)
+          taches.map(
+            tache =>  <Tache 
+                        key={tache.id} 
+                        {... tache} 
+                        gererBasculerTache={gererBasculerTache} 
+                        gererSupprimerTache={gererSupprimerTache} 
+                      />
+          )
         }
       </div>
     </section>

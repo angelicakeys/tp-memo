@@ -1,3 +1,3 @@
-# Exercice 4 : Application Memo
+# Exercice 4 - Solution : Application Memo
 
-Code de départ de l'application Memo à utiliser pour l'exercice 4 du cours 582-4PA.
+Solution modèle de l'exercice 4 du cours 582-4PA.
