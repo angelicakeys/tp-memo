@@ -7,7 +7,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 export default function Tache({id, texte, completee, date, gererBasculerTache
                                                       , gererSupprimerTache}) {
   return (
-    <div className={"Tache " + (completee && 'completee')}>
+    <div className={"Tache" + (completee ? ' completee' : '')}>
       <IconButton
         size="small"
         color="primary"

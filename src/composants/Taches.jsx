@@ -36,10 +36,12 @@ export default function Taches({etatTaches, utilisateur}) {
     }
   }
 
+  /**
+   * Fait basculer (toggle) l'état d'une tâche pour l'utilisateur connecté
+   * @param {string} tid Identifiant de la tâche à faire basculer
+   * @param {Boolean} etatActuel État actuel de la tâche
+   */
   function gererBasculerTache(tid, etatActuel) {
-    console.log('Util : ', uid);
-    console.log('Tâche : ', tid);
-    console.log('Etat actuel : ', etatActuel);
     crudTaches.modifier(uid,tid,etatActuel).then(
       () => setTaches(taches.map(
         tache => {
@@ -52,6 +54,10 @@ export default function Taches({etatTaches, utilisateur}) {
     )
   }
 
+  /**
+   * Supprime une tâche pour l'utilisateur connecté
+   * @param {string} tid Identifiant de la tâche à supprimer
+   */
   function gererSupprimerTache(tid) {
     crudTaches.supprimer(uid,tid).then(
       () => setTaches(taches.filter(

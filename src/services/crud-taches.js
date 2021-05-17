@@ -37,11 +37,25 @@ export async function lireTout(uid) {
                 );
 }
 
+/**
+ * Modifie l'état d'une tâche dans Firestore pour l'utilisateur connecté
+ * @param {String} uid Identifiant de l'utilisateur connecté
+ * @param {String} tid Identifiant de la tâche à faire basculer d'état
+ * @param {Boolean} etatActuel Valeur actuelle de l'état de la tâche
+ * @returns {Promise<void>} Promesse JS sans valeur (vide)
+ */
 export async function modifier(uid, tid, etatActuel) {
   return instanceFirestore.collection(collUtil).doc(uid).collection(collTaches)
     .doc(tid).update({completee:!etatActuel});
 }
 
+/**
+ * 
+ * Supprime une tâche dans Firestore pour l'utilisateur connecté
+ * @param {String} uid Identifiant de l'utilisateur connecté
+ * @param {String} tid Identifiant de la tâche à faire basculer d'état
+ * @returns {Promise<void>} Promesse JS sans valeur (vide)
+ */
 export async function supprimer(uid, tid) {
   return instanceFirestore.collection(collUtil).doc(uid).collection(collTaches)
     .doc(tid).delete();
