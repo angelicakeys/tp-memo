@@ -26,7 +26,10 @@ export async function creer(uid, tache) {
 export async function lireTout(uid) {
   const taches = [];
   return instanceFirestore.collection(collUtil).doc(uid).collection(collTaches)
-                .orderBy('date', 'desc').get().then(
+               // .where('completee','==',true)
+                .orderBy('completee','asc')
+                .orderBy('date', 'desc')
+               .get().then(
                   reponse => reponse.forEach(
                     doc => {
                       taches.push({id: doc.id, ...doc.data()})
@@ -60,3 +63,57 @@ export async function supprimer(uid, tid) {
   return instanceFirestore.collection(collUtil).doc(uid).collection(collTaches)
     .doc(tid).delete();
 }
+/******* Supprimer tous les tâches POINT B ESSAI *******************************************************************/
+export async function supprimerTaches(taches) {
+  return instanceFirestore.collection(collUtil).doc(taches).collection(collTaches)
+   
+  .where('completee','===',true).get().then(function(supprimerLesTaches){
+    supprimerLesTaches.forEach(function(doc) {
+      doc(taches).delete();
+     
+
+    });
+  });
+
+
+}
+
+
+
+
+/******* trier les tâches Completee POINT D *******************************************************************/
+
+export async function trierTachesComplete(uid) {
+  const taches = [];
+  return instanceFirestore.collection(collUtil).doc(uid).collection(collTaches)
+              
+           
+                .where('completee','!=',false).get().then(
+                  reponse => reponse.forEach(
+                    doc => {
+                      taches.push({id: doc.id, ...doc.data()})
+                    }
+                  )
+                ).then(
+                  () => taches
+                );
+              }
+
+/******* trier les tâches Non- POINT D *******************************************************************/
+
+export async function trierTachesNonComplete(uid) {
+  const taches = [];
+  return instanceFirestore.collection(collUtil).doc(uid).collection(collTaches)
+           
+                .where('completee','!=',true).get().then(
+                  reponse => reponse.forEach(
+                    doc => {
+                      taches.push({id: doc.id, ...doc.data()})
+                    }
+                  )
+                ).then(
+                  () => taches
+                );
+            }
+
+

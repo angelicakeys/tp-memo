@@ -1,30 +1,33 @@
 import './Controle.scss';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+//import ToggleButton from '@material-ui/lab/ToggleButton';
+//import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+/***import */
 
-export default function Controle({etatTaches, utilisateur}) {
+
+
+
+export default function Controle({etatTaches, utilisateur,supprimerTaches,taches,trierTachesComplete,trierTachesNonComplete}) {
   
   return (
     <footer className="Controle">
-      <ToggleButtonGroup 
-        size="small" 
-        exclusive={true} 
-      >
-        <ToggleButton value={'toutes'}>Toutes</ToggleButton>
-        <ToggleButton value={true}>Complétées</ToggleButton>
-        <ToggleButton value={false}>Actives</ToggleButton>
-      </ToggleButtonGroup>
+   
+      <a href="value">Toutes</a>
+      <a href="value" onClick={() => trierTachesComplete(taches)}>Completée</a>
+      <a href="value"onClick={() => trierTachesNonComplete(taches)} >Non-Completée</a>
+
       <span className="compte">
-        ?? tâches restantes
+    {/* essai point C ********}
+    {/* { afficherNbTachesNonCompletee={afficherNbTachesNonCompletee}} */}
+        tâches restantes
       </span>
       <IconButton 
         aria-label="delete" 
         size="small" 
         variant="contained" 
         color="secondary" 
-        onClick={() => alert('Rien pour le moment')} 
+        onClick={() => supprimerTaches(taches)} 
         title="Supprimer les tâches complétées"
       >
         <DeleteIcon fontSize="small" />

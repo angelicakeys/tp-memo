@@ -3,9 +3,11 @@ import './Taches.scss';
 import * as crudTaches from '../services/crud-taches';
 import { useState, useEffect } from 'react';
 
-export default function Taches({etatTaches, utilisateur}) {
+export default function Taches({etatTaches, utilisateur,completee}) {
   const uid = utilisateur.uid;
   const [taches, setTaches] = etatTaches;
+
+
 
   /**
    * On cherche les tâches une seule fois après l'affichage du composant
@@ -65,7 +67,20 @@ export default function Taches({etatTaches, utilisateur}) {
       ))
     )
   }
+/******* Afficher le Nombre des tâches Non-Completee POINT C ESSAI  *******************************************************************/
+/* function afficherNbTachesNonCompletee(tid) {
+  crudTaches.trierNombre(uid,tid).then(
+    () => setTaches(taches.filter(
+      tache => tache.length == tache.completee
+      
+    ))
+  )
+} */
 
+
+
+
+ 
   return (
     <section className="Taches">
       <form onSubmit={e => gererAjoutTache(uid, e)}>
@@ -85,6 +100,7 @@ export default function Taches({etatTaches, utilisateur}) {
                         {... tache} 
                         gererBasculerTache={gererBasculerTache} 
                         gererSupprimerTache={gererSupprimerTache} 
+                       
                       />
           )
         }

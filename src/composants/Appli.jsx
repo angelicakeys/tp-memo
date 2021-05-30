@@ -7,6 +7,23 @@ import * as crudUtilisateurs from '../services/crud-utilisateurs';
 import Accueil from './Accueil';
 import Utilisateur from './Utilisateur';
 
+/***** import taches POINT B ESSAI **************/
+  import * as crudTaches from '../services/crud-taches'; 
+import * as taches from '../services/crud-taches';
+import * as setTaches from '../services/crud-taches';
+import * as completee from '../services/crud-taches';
+
+
+  /***AJOUT SUPRRIMER TOUTES LES TACHES POINT B ESSAI *************//* Appli */
+function supprimerTaches(uid,taches){
+  crudTaches.supprimer(uid,taches).then(
+    () => setTaches(taches.filter(
+      taches => taches.id == completee
+    ))
+  )
+}
+
+
 export default function Appli() {
   // État de l'utilisateur
   const [utilisateur, setUtilisateur] = useState(null);
@@ -23,8 +40,8 @@ export default function Appli() {
           <img src={logo} className="appliLogo" alt="Memo" />
           <Utilisateur utilisateur={utilisateur} />
         </header>
-        <Taches etatTaches={etatTaches} utilisateur={utilisateur} />
-        <Controle etatTaches={etatTaches} utilisateur={utilisateur} />
+        <Taches etatTaches={etatTaches} utilisateur={utilisateur}/>
+        <Controle etatTaches={etatTaches} utilisateur={utilisateur}  />
       </div>
     :
       <Accueil />
